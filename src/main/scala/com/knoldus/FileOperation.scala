@@ -19,7 +19,7 @@ class FileOperation extends Actor with ActorLogging {
     case file: File =>
       val result = getLogs(file)
       log.info(result.toString)
-
+    case _=>log.info("invalid")
   }
 
   def getLogs(file: File): LogStatus = {
