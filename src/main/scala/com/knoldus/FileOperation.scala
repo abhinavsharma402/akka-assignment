@@ -71,9 +71,9 @@ class FileOperation extends Actor with ActorLogging {
 object FileOperation extends App {
   val config = ConfigFactory.load()
   val system = ActorSystem("LogFilesActorSystem", config.getConfig("configuration"))
-  val confStr="default-dispatcher"
-  val threads=6
-  val ref = system.actorOf(RoundRobinPool(threads).props(Props[FileOperation] withDispatcher(confStr)), "FileOperation")
+  val confStr="fixed-dispatcher"
+  val actor=4
+  val ref = system.actorOf(RoundRobinPool(actor).props(Props[FileOperation]withDispatcher(confStr)), "FileOperation")
 
 
   val pathObj = new File("src/main/resources/logfiles")
